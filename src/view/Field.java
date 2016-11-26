@@ -6,23 +6,26 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
-import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 import Utilities.*;
+import view.CrosswordPanel.SubPanel;
 public class Field extends JLabel {
 	
 	public static class LetterSet {
 		private static final String[] alphabets = 
-				{"1", "2", "3", "4", "5", "6", "7", "8", "9",};
+				{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+				"J", "K", "L", "M", "N", "O", "P", "Q", "R",
+				"S", "T", "U", "V", "W", "X", "Y", "Z"};
 	}
 	
 	private int x;      // X position in game.
     private int y;      // Y position in game.
-    public Field(int x, int y) {
+    private SubPanel parentPanel;
+    public Field(int x, int y, SubPanel parent) {
         super("", CENTER);
         this.x = x;
         this.y = y;
-        //this.parentPanel = parent;
+        this.parentPanel = parent;
         setPreferredSize(new Dimension(Constants.width,Constants.height));
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
         setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
@@ -42,10 +45,9 @@ public class Field extends JLabel {
     public int getFieldY() {
         return y;
     }
-    /*
-    public SubPanel getParentPanel(){
+    
+    public SubPanel getParentPanel() {
     	return parentPanel;
     }
-    */
     
 }
