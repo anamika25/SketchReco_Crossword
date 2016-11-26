@@ -48,10 +48,9 @@ public class CrosswordController extends MouseInputAdapter {
             int y = field.getFieldY();
 	        if(timerTask != null)
 	        	timerTask.cancel();
-	        	
 	        if(_changedField(e.getX(), e.getY(), panel) && currentSketch != null){
-	        	_startNewSketch();
-	        }
+        		_startNewSketch();
+        	}
 	        currentStroke = new Stroke(new ArrayList<Point>());
 	        currentStroke.addPoint(e.getX(), e.getY());        		
 	        this.currentField = field;
@@ -71,14 +70,19 @@ public class CrosswordController extends MouseInputAdapter {
     	panel.resetPoints();
     	if(currentSketch == null)
     	{
-    		int row = _getStrokeRow()+(3*panel.getYOffset());
-    		int column = _getStrokeColumn()+(3*panel.getXOffset());
+    		int row = _getStrokeRow()+(panel.getYOffset());
+    		int column = _getStrokeColumn()+(panel.getXOffset());
     		currentSketch = new Sketch(row, column);
+    		System.out.println("the row is " + row);
+    		currentSketch = new Sketch(row, column);
+    		System.out.println("the column is " + column);
     	}
     	
     	currentSketch.addStroke(currentStroke);
     	currentField = (Field)panel.getComponentAt(e.getPoint());
-    	
+    	for(Point p : currentStroke.getPoints()) {
+    		System.out.println(p);
+    	}
     	if(!panel.getSketches().contains(currentSketch)) {
     		panel.addSketch(currentSketch);
     	}
@@ -148,7 +152,7 @@ public class CrosswordController extends MouseInputAdapter {
     }
     
     private boolean _changedField(int x, int y, SubPanel panel){
-    	return currentSketch == null || currentSketch.getRow() != _getStrokeRow(y)+(3*panel.getYOffset()) || currentSketch.getColumn() != _getStrokeColumn(x)+(3*panel.getXOffset());
+    	return currentSketch == null || currentSketch.getRow() != _getStrokeRow(y)+(panel.getYOffset()) || currentSketch.getColumn() != _getStrokeColumn(x)+(panel.getXOffset());
     }
     
     private void _startNewSketch(){
@@ -166,7 +170,7 @@ public class CrosswordController extends MouseInputAdapter {
             	currentPanel.repaint();
             }
 	    	currentSketch = null;
-	    	crosswordPanel.repaint();
+	    	//crosswordPanel.repaint();
 		} 
     }
    
