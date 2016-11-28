@@ -81,7 +81,8 @@ public class CrosswordController extends MouseInputAdapter {
     	currentSketch.addStroke(currentStroke);
     	currentField = (Field)panel.getComponentAt(e.getPoint());
     	for(Point p : currentStroke.getPoints()) {
-    		System.out.println(p);
+    		System.out.println(p.getX() + " , " + p.getY());
+    		currentSketch.setMatrixIndex((int)(p.getY()), (int)(p.getX()));
     	}
     	if(!panel.getSketches().contains(currentSketch)) {
     		panel.addSketch(currentSketch);
@@ -169,6 +170,14 @@ public class CrosswordController extends MouseInputAdapter {
             		sketches.remove(id);
             	currentPanel.repaint();
             }
+    	    int [][] imageMatrix = currentSketch.getImageMatrix();
+    	    // test code : TO DO : Remove it
+    	    for(int i = 0 ; i < 80 ; ++i) {
+    	    	for(int j = 0; j < 80; ++j) {
+    	    		System.out.print(imageMatrix[i][j] + " ");
+    	    	}
+    	    	System.out.println();
+    	    }
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 
