@@ -2,15 +2,16 @@ package models;
 import Utilities.*;
 
 public class Matrix{
+	private
 	int orig[][];
 	int comp[][];
 	
-	public Matrix(){
-		orig = new int[Constants.height][Constants.width];
+	public Matrix(int[][] inp){
+		orig = inp;
 		comp = new int[Constants.com_height][Constants.com_height];	
 	}
 	
-	void matrixCompression(){
+	public void matrixCompression(){
 		int flag = 0;
 		for(int i=0;i<10;i++){
 			for(int j=0;j<10;j++){
@@ -41,6 +42,9 @@ public class Matrix{
 		
 		
 		
+	}
+	public int[][] getComp(){
+		return comp;
 	}
 	
 	

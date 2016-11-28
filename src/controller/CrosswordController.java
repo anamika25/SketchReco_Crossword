@@ -10,6 +10,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputAdapter;
+import models.*;
 
 import models.Grid;
 import models.Sketch;
@@ -84,6 +85,12 @@ public class CrosswordController extends MouseInputAdapter {
     		System.out.println(p.getX() + " , " + p.getY());
     		currentSketch.setMatrixIndex((int)(p.getY()), (int)(p.getX()));
     	}
+    	int[][] inp = currentSketch.getImageMatrix();
+    	
+    	Matrix mat = new Matrix(inp);
+    	mat.matrixCompression();
+    	int comp[][] = mat.getComp();
+    	
     	if(!panel.getSketches().contains(currentSketch)) {
     		panel.addSketch(currentSketch);
     	}
