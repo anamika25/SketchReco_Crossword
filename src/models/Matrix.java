@@ -43,8 +43,7 @@ public class Matrix{
 				fw.write(comp[i][j]+" ");
 			}
 		}
-		fw.write(index);
-		fw.write("\n");
+		fw.write(index+ "\n");
 		fw.close();
 	}
 	public int[][] getComp(){
