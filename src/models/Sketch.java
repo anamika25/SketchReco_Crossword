@@ -43,7 +43,9 @@ public class Sketch {
 	}
 	
 	public void setMatrixIndex(int x, int y) {
-		imageMatrix[x][y] = 1;
+		if(x >= 0 && y >=0 && x < Constants.height && y < Constants.width ) {
+			imageMatrix[x][y] = 1;
+		}
 	}
 	
 	public int[][] getImageMatrix() {

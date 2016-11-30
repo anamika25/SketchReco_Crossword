@@ -76,9 +76,9 @@ public class CrosswordController extends MouseInputAdapter {
     		int row = _getStrokeRow()+(panel.getYOffset());
     		int column = _getStrokeColumn()+(panel.getXOffset());
     		currentSketch = new Sketch(row, column);
-    		System.out.println("the row is " + row);
-    		currentSketch = new Sketch(row, column);
-    		System.out.println("the column is " + column);
+    		//System.out.println("the row is " + row);
+    		//currentSketch = new Sketch(row, column);
+    		//System.out.println("the column is " + column);
     	}
     	
     	currentSketch.addStroke(currentStroke);
