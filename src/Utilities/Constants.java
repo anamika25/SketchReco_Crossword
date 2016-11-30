@@ -3,8 +3,9 @@ package Utilities;
 public class Constants {
 	public static int width = 80;
 	public static int height = 80;
-	public static int com_width = 10;
-	public static int com_height = 10;
+	public static int com_width = 5;
+	public static int com_height = 5;
+	public static int mat_comp=16;
 	public static int gridHeight = 10;
 	public static int gridWidth = 13; 
 	public static int subpanelHeight = 1;
