@@ -36,6 +36,7 @@ public class CrosswordController extends MouseInputAdapter {
     private HashMap<Field, ArrayList<Sketch>> fieldSketchMap;
     private SubPanel currentPanel;
 	private int count=0;
+	private static int index = 0;
     public CrosswordController(CrosswordPanel panel, Grid grid) {
         this.crosswordPanel = panel;
         this.grid = grid;
@@ -192,10 +193,10 @@ public class CrosswordController extends MouseInputAdapter {
     			{"A", "B", "C", "D", "E", "F", "G", "H", "I",
     			"J", "K", "L", "M", "N", "O", "P", "Q", "R",
     			"S", "T", "U", "V", "W", "X", "Y", "Z"};
-			int index=0;
+			
 			
         	Matrix mat = new Matrix(inp);
-        	if(count==20){
+        	if(count==5){
 				index++;
 				count = 0;
         	}
