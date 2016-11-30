@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.event.MouseInputAdapter;
 
 import Utilities.Constants;
@@ -52,7 +54,12 @@ public class CrosswordController extends MouseInputAdapter {
 	        if(timerTask != null)
 	        	timerTask.cancel();
 	        if(_changedField(e.getX(), e.getY(), panel) && currentSketch != null){
-        		_startNewSketch();
+        		try {
+					_startNewSketch();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
         	}
 	        currentStroke = new Stroke(new ArrayList<Point>());
 	        currentStroke.addPoint(e.getX(), e.getY());        		
@@ -113,7 +120,12 @@ public class CrosswordController extends MouseInputAdapter {
     	timerTask = new TimerTask() {
   		  @Override
   		  public void run() {
-  		    _startNewSketch();
+  		    try {
+				_startNewSketch();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
   		  }
   		};
   		timer.schedule(timerTask, 5*1000);
@@ -161,7 +173,7 @@ public class CrosswordController extends MouseInputAdapter {
     	return currentSketch == null || currentSketch.getRow() != _getStrokeRow(y)+(panel.getYOffset()) || currentSketch.getColumn() != _getStrokeColumn(x)+(panel.getXOffset());
     }
     
-    private void _startNewSketch(){
+    private void _startNewSketch() throws IOException{
     	if(currentSketch != null){
     		//_setFieldValue(_classifySketch(currentSketch));
     		List<Sketch> sketches = currentPanel.getSketches();
@@ -176,16 +188,21 @@ public class CrosswordController extends MouseInputAdapter {
             	currentPanel.repaint();
             }
     	    int[][] inp = currentSketch.getImageMatrix();
-			private static final String[] letters = 
-					{"A", "B", "C", "D", "E", "F", "G", "H", "I",
-					"J", "K", "L", "M", "N", "O", "P", "Q", "R",
-					"S", "T", "U", "V", "W", "X", "Y", "Z"};
+    	    String[] letters = 
+    			{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+    			"J", "K", "L", "M", "N", "O", "P", "Q", "R",
+    			"S", "T", "U", "V", "W", "X", "Y", "Z"};
 			int index=0;
 			
         	Matrix mat = new Matrix(inp);
-			
-        	mat.matrixCompression();
+        	if(count==20){
+				index++;
+				count = 0;
+        	}
+        	System.out.println("Draw " + letters[index]);
+        	mat.matrixCompression(index);
 			count++;
+			
 			System.out.println(count);
         	int comp[][] = mat.getComp();
         	

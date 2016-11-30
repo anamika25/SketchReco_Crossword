@@ -1,17 +1,24 @@
 package models;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import Utilities.*;
 
 public class Matrix{
 	private
 	int orig[][];
 	int comp[][];
+	String[] letters = 
+		{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+		"J", "K", "L", "M", "N", "O", "P", "Q", "R",
+		"S", "T", "U", "V", "W", "X", "Y", "Z"};
 	
 	public Matrix(int[][] inp){
 		orig = inp;
 		comp = new int[Constants.com_height][Constants.com_width];	
 	}
 	
-	public void matrixCompression(){
+	public void matrixCompression(int index) throws IOException{
 		
 		FileWriter fw = new FileWriter("train.txt", true);
 		int flag = 0;
@@ -35,10 +42,9 @@ public class Matrix{
 					comp[i][j] = 0;
 				fw.write(comp[i][j]+" ");
 			}
-			fw.write(index);
-			index++;
 		}
-		
+		fw.write(index);
+		fw.write("\n");
 		fw.close();
 	}
 	public int[][] getComp(){
