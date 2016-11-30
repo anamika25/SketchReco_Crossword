@@ -12,6 +12,8 @@ public class Matrix{
 	}
 	
 	public void matrixCompression(){
+		
+		FileWriter fw = new FileWriter("train.txt", true);
 		int flag = 0;
 		for(int i=0;i<Constants.com_height;i++){
 			for(int j=0;j<Constants.com_width;j++){
@@ -31,10 +33,13 @@ public class Matrix{
 					comp[i][j]=1;
 				else
 					comp[i][j] = 0;
+				fw.write(comp[i][j]+" ");
 			}
-			
+			fw.write(index);
+			index++;
 		}
 		
+		fw.close();
 	}
 	public int[][] getComp(){
 		return comp;

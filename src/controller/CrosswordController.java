@@ -33,7 +33,7 @@ public class CrosswordController extends MouseInputAdapter {
     private Field currentField;
     private HashMap<Field, ArrayList<Sketch>> fieldSketchMap;
     private SubPanel currentPanel;
-
+	private int count=0;
     public CrosswordController(CrosswordPanel panel, Grid grid) {
         this.crosswordPanel = panel;
         this.grid = grid;
@@ -176,8 +176,17 @@ public class CrosswordController extends MouseInputAdapter {
             	currentPanel.repaint();
             }
     	    int[][] inp = currentSketch.getImageMatrix();
+			private static final String[] letters = 
+					{"A", "B", "C", "D", "E", "F", "G", "H", "I",
+					"J", "K", "L", "M", "N", "O", "P", "Q", "R",
+					"S", "T", "U", "V", "W", "X", "Y", "Z"};
+			int index=0;
+			
         	Matrix mat = new Matrix(inp);
+			
         	mat.matrixCompression();
+			count++;
+			System.out.println(count);
         	int comp[][] = mat.getComp();
         	
         	for(int i = 0;i<Constants.com_height;i++){
