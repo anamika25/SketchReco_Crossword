@@ -3,9 +3,7 @@ package learner;
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by sumeetsingharora on 3/16/16.
- */
+
 public class Neuron {
 
     public ArrayList<Neuron> inputNeuron;

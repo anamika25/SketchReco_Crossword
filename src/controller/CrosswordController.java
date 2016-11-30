@@ -10,6 +10,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import javax.swing.event.MouseInputAdapter;
+
+import Utilities.Constants;
 import models.*;
 
 import models.Grid;
@@ -85,17 +87,7 @@ public class CrosswordController extends MouseInputAdapter {
     		System.out.println(p.getX() + " , " + p.getY());
     		currentSketch.setMatrixIndex((int)(p.getY()), (int)(p.getX()));
     	}
-    	int[][] inp = currentSketch.getImageMatrix();
-    	
-    	Matrix mat = new Matrix(inp);
-    	mat.matrixCompression();
-    	int comp[][] = mat.getComp();
-    	
-    	for(int i = 0;i<10;i++){
-    		for(int j=0;j<10;j++)
-    			System.out.print(comp[i][j]);
-    		System.out.println();
-    		}
+ 
     	
     	if(!panel.getSketches().contains(currentSketch)) {
     		panel.addSketch(currentSketch);
@@ -183,14 +175,16 @@ public class CrosswordController extends MouseInputAdapter {
             		sketches.remove(id);
             	currentPanel.repaint();
             }
-    	    int [][] imageMatrix = currentSketch.getImageMatrix();
-    	    // test code : TO DO : Remove it
-    	    for(int i = 0 ; i < 80 ; ++i) {
-    	    	for(int j = 0; j < 80; ++j) {
-    	    		System.out.print(imageMatrix[i][j] + " ");
-    	    	}
-    	    	System.out.println();
-    	    }
+    	    int[][] inp = currentSketch.getImageMatrix();
+        	Matrix mat = new Matrix(inp);
+        	mat.matrixCompression();
+        	int comp[][] = mat.getComp();
+        	
+        	for(int i = 0;i<Constants.com_height;i++){
+        		for(int j=0;j<Constants.com_width;j++)
+        			System.out.print(comp[i][j]);
+        		System.out.println();
+        	}
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 

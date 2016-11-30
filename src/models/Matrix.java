@@ -16,15 +16,13 @@ public class Matrix{
 		for(int i=0;i<Constants.com_height;i++){
 			for(int j=0;j<Constants.com_width;j++){
 				flag = 0;
-				for(int k=0;k<mat_comp;k++){
-					for(int l=0;l<mat_comp;l++){
-						if(orig[i*mat_comp + k][j*mat_comp + l]==1)
+				for(int k=0;k<Constants.mat_comp;k++){
+					for(int l=0;l<Constants.mat_comp;l++){
+						if(orig[i*Constants.mat_comp + k][j*Constants.mat_comp + l]==1)
 							{
-							flag = 1;
-							break;
-							}
-						
-						
+								flag = 1;
+								break;
+							}	
 					}
 					if(flag==1)
 						break;
@@ -36,11 +34,6 @@ public class Matrix{
 			}
 			
 		}
-		
-		
-		
-		
-		
 		
 	}
 	public int[][] getComp(){
