@@ -1,6 +1,7 @@
 package models;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import Utilities.*;
 
@@ -8,6 +9,7 @@ public class Matrix{
 	private
 	int orig[][];
 	int comp[][];
+	ArrayList<Double> neuralNetworkInput ;
 	String[] letters = 
 		{"A", "B", "C", "D", "E", "F", "G", "H", "I",
 		"J", "K", "L", "M", "N", "O", "P", "Q", "R",
@@ -16,11 +18,12 @@ public class Matrix{
 	public Matrix(int[][] inp){
 		orig = inp;
 		comp = new int[Constants.com_height][Constants.com_width];	
+		neuralNetworkInput = new ArrayList<Double>();
 	}
 	
 	public void matrixCompression(int index) throws IOException{
 		
-		FileWriter fw = new FileWriter("train.txt", true);
+		//FileWriter fw = new FileWriter("train.txt", true);
 		int flag = 0;
 		for(int i=0;i<Constants.com_height;i++){
 			for(int j=0;j<Constants.com_width;j++){
@@ -40,14 +43,19 @@ public class Matrix{
 					comp[i][j]=1;
 				else
 					comp[i][j] = 0;
-				fw.write(comp[i][j]+" ");
+				neuralNetworkInput.add((double)comp[i][j]);
+				//fw.write(comp[i][j]+" ");
 			}
 		}
-		fw.write(index+ "\n");
-		fw.close();
+		//fw.write(index+ "\n");
+		//fw.close();
 	}
 	public int[][] getComp(){
 		return comp;
+	}
+	
+	public ArrayList<Double> getNeuralNetworkInput() {
+		return neuralNetworkInput;
 	}
 	
 	

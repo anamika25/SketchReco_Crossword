@@ -15,6 +15,7 @@ import javax.swing.event.MouseInputAdapter;
 
 import Utilities.Constants;
 import learner.NeuralNetwork;
+import learner.Neuron;
 import learner.Utilities;
 import learner.Attribute;
 import learner.FileReaderUtility;
@@ -194,7 +195,7 @@ public class CrosswordController extends MouseInputAdapter {
              ++argumentNum;
          }
          
-         NeuralNetwork neuralNetwork = new NeuralNetwork(hidden, outputNodes, rawData.inputVectors.get(0).size(), attributes.get(attributes.size()-1));
+         neuralNetwork = new NeuralNetwork(hidden, outputNodes, rawData.inputVectors.get(0).size(), attributes.get(attributes.size()-1));
          int split =  (int)(rawData.inputVectors.size()/pruneDataSetSize);
          Data trainData = new Data();
          Data validationData = new Data();
@@ -210,6 +211,7 @@ public class CrosswordController extends MouseInputAdapter {
          }
          neuralNetwork.train(trainData, attributes.get(attributes.size()-1), eta,validationData);
          neuralNetwork.updateToBestWeights();
+         System.out.println();
     }
     
     private int _getStrokeRow(){
@@ -270,9 +272,37 @@ public class CrosswordController extends MouseInputAdapter {
         			System.out.print(comp[i][j]);
         		System.out.println();
         	}
+        	testSketch(mat.getNeuralNetworkInput());
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 
+    }
+    
+    private void testSketch(ArrayList<Double> input) {
+    	double count = 0.0;
+            for (int k = 0; k < neuralNetwork.getLayers().size(); ++k) {
+                for (Neuron neuron : neuralNetwork.getLayers().get(k)) {
+                    double sum = 0.0;
+                    if (k == 0) {
+                        sum = Utilities.getSumFromInputs(neuron, input);
+                    } else {
+                        sum = Utilities.getSumFromPrev(neuron);
+                    }
+                    Utilities.activate(neuron, sum);
+                }
+            }
+        int outputLayer = neuralNetwork.getLayers().size() - 1;
+        double maxValue = -100.0;
+        double maxNeuron = 0.0;
+        for (int k = 0; k < neuralNetwork.getLayers().get(outputLayer).size(); ++k) {
+            double currentValue = neuralNetwork.getLayers().get(outputLayer).get(k).activationValue;
+            if (currentValue > maxValue) {
+                maxValue = currentValue;
+                maxNeuron = (double) k;
+            }
+        }
+        
+        System.out.println(maxNeuron);
     }
    
 }

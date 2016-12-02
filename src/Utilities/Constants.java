@@ -20,7 +20,7 @@ public class Constants {
 	
 	//neural network params
 	public static int numAttributes = 65;
-	public static double eta = 0.01;
+	public static double eta = 0.001;
 	public static int hiddenLayers = 1;
 	public static int hiddenNodes = 5;
 	public static int outputNodes = 26;
