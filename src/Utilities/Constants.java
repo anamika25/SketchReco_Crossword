@@ -17,5 +17,12 @@ public class Constants {
 	//subpanel params.
 	public static int subpanelHeight = 1;
 	public static int subpanelWidth = 1;
+	
+	//neural network params
+	public static int numAttributes = 65;
+	public static double eta = 0.01;
+	public static int hiddenLayers = 1;
+	public static int hiddenNodes = 5;
+	public static int outputNodes = 26;
 
 }

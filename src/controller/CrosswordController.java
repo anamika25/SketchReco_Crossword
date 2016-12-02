@@ -14,7 +14,16 @@ import java.io.IOException;
 import javax.swing.event.MouseInputAdapter;
 
 import Utilities.Constants;
+import learner.NeuralNetwork;
+import learner.Utilities;
+import learner.Attribute;
+import learner.FileReaderUtility;
+import learner.Replacement;
+import learner.Data;
+
+
 import models.*;
+
 
 import models.Grid;
 import models.Sketch;
@@ -37,11 +46,13 @@ public class CrosswordController extends MouseInputAdapter {
     private SubPanel currentPanel;
 	private int count=0;
 	private static int index = 0;
+	private NeuralNetwork neuralNetwork;
     public CrosswordController(CrosswordPanel panel, Grid grid) {
         this.crosswordPanel = panel;
         this.grid = grid;
         this.timer = new Timer();
         this.fieldSketchMap = new HashMap<Field, ArrayList<Sketch>>();
+        // neuralNetwork = new NeuralNetwork();
        // this.templateMatcher = new TemplateMatcher(".");
     }
 
@@ -153,6 +164,53 @@ public class CrosswordController extends MouseInputAdapter {
     
     public void mouseEntered(MouseEvent e) { }
     public void mouseExited(MouseEvent e) { }
+    
+    public void trainNeuralNetwork() {
+    	ArrayList<Attribute> attributes = Utilities.constructAttributes();
+    	
+    	 FileReaderUtility fileData = new FileReaderUtility("train.txt"); //TO DO
+         ArrayList<String> fileDataRows = fileData.ReadFile();
+         Utilities.randomizeData(fileDataRows);
+
+         ArrayList<Attribute> attrs = new ArrayList<Attribute>();
+         
+         for(int i = 0 ; i < (Constants.numAttributes - 1);  ++i) {
+        	 attrs.add(attributes.get(i));
+         }
+         
+         int start = 0;
+         double pruneDataSetSize = 10/3.0;
+         
+         Data rawData  = Utilities.preProcessData(fileDataRows, attributes.get(attributes.size()-1), attributes);
+         Utilities.addInputNodes(rawData,attributes, Replacement.LOG);
+         double eta = Constants.eta;
+         
+         int outputNodes =attributes.get(attributes.size()-1).getValues().size();
+         ArrayList<Integer> hidden = new ArrayList<Integer>();
+         int numOfHiddenLayers = Constants.hiddenLayers;
+         int argumentNum = 5;
+         for(int i = 0; i < numOfHiddenLayers; ++i) {
+             hidden.add(Constants.hiddenNodes);
+             ++argumentNum;
+         }
+         
+         NeuralNetwork neuralNetwork = new NeuralNetwork(hidden, outputNodes, rawData.inputVectors.get(0).size(), attributes.get(attributes.size()-1));
+         int split =  (int)(rawData.inputVectors.size()/pruneDataSetSize);
+         Data trainData = new Data();
+         Data validationData = new Data();
+
+         for(int j = 0 ; j < split ; ++j) {
+             validationData.rawData.add(rawData.rawData.get(j));
+             validationData.inputVectors.add(rawData.inputVectors.get(j));
+         }
+
+         for(int j = split; j < rawData.inputVectors.size(); ++j){
+             trainData.rawData.add(rawData.rawData.get(j));
+             trainData.inputVectors.add(rawData.inputVectors.get(j));
+         }
+         neuralNetwork.train(trainData, attributes.get(attributes.size()-1), eta,validationData);
+         neuralNetwork.updateToBestWeights();
+    }
     
     private int _getStrokeRow(){
 		return _getStrokeRow(currentStroke.getFirstPoint().y);

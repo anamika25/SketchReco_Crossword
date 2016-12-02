@@ -11,5 +11,9 @@ public class Grid extends Observable {
 	public Grid() {
 		
 	}
+	
+	public void trainData() {
+		
+	}
 	    
 }
