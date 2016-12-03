@@ -6,9 +6,9 @@ public class Constants {
 	public static int height = 80;
 	
 	//  final compresses matrix. 
-	public static int com_width = 8;
-	public static int com_height = 8; 
-	public static int mat_comp=10; 
+	public static int com_width = 5;
+	public static int com_height = 5; 
+	public static int mat_comp=16; 
 	
 	//grid params
 	public static int gridHeight = 10;
@@ -20,9 +20,9 @@ public class Constants {
 	
 	//neural network params
 	public static int numAttributes = 65;
-	public static double eta = 0.05;
+	public static double eta = 0.02;
 	public static int hiddenLayers = 2;
-	public static int hiddenNodes = 25;
+	public static int hiddenNodes = 32;
 	public static int outputNodes = 26;
 
 }

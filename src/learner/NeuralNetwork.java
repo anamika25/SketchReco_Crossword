@@ -13,7 +13,7 @@ public class NeuralNetwork {
 
     public double minError = Double.MAX_VALUE;
 
-    public int doubleIterationLimit = 2000;
+    public int doubleIterationLimit = 3000;
 
     public int lowerLimit = 200;
 
