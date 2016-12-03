@@ -279,7 +279,6 @@ public class CrosswordController extends MouseInputAdapter {
     }
     
     private void testSketch(ArrayList<Double> input) {
-    	double count = 0.0;
             for (int k = 0; k < neuralNetwork.getLayers().size(); ++k) {
                 for (Neuron neuron : neuralNetwork.getLayers().get(k)) {
                     double sum = 0.0;
@@ -301,7 +300,6 @@ public class CrosswordController extends MouseInputAdapter {
                 maxNeuron = (double) k;
             }
         }
-        
         System.out.println(maxNeuron);
     }
    
