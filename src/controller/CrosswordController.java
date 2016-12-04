@@ -6,12 +6,16 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
 import javax.swing.event.MouseInputAdapter;
+
+import com.sun.javafx.collections.MappingChange.Map;
 
 import Utilities.Constants;
 import learner.NeuralNetwork;
@@ -302,7 +306,16 @@ public class CrosswordController extends MouseInputAdapter {
                 maxNeuron = (double) k;
             }
         }
-        System.out.println(maxNeuron);
+        String text = "";
+        Set<Entry<String, Double>> entrySet = neuralNetwork.target.entrySet();
+        for (Entry e : entrySet) {
+            if(((double)e.getValue()) == maxNeuron) {
+            	int val = Integer.parseInt(e.getKey().toString()) + 65;
+            	text = Character.toString((char)val);
+            	System.out.println(text);
+            	break;
+            }
+        }
     }
    
 }
