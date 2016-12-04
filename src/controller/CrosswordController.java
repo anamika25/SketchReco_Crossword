@@ -29,6 +29,7 @@ import models.*;
 import models.Grid;
 import models.Sketch;
 import models.Stroke;
+import puzzle.Puzzle;
 import view.CrosswordPanel;
 import view.Field;
 import view.CrosswordPanel.SubPanel;
@@ -37,7 +38,6 @@ import view.CrosswordPanel.SubPanel;
 public class CrosswordController extends MouseInputAdapter {
 	private CrosswordPanel crosswordPanel;    
     private Grid grid;                  
-  //  private TemplateMatcher templateMatcher; TO DO : Need to implement our classifier: Nishant and Varinder
     private Stroke currentStroke;
     private Sketch currentSketch;
     private Timer timer;
@@ -48,13 +48,14 @@ public class CrosswordController extends MouseInputAdapter {
 	private int count=0;
 	private static int index = 0;
 	private NeuralNetwork neuralNetwork;
-    public CrosswordController(CrosswordPanel panel, Grid grid) {
+	private Puzzle puzzle;
+	
+    public CrosswordController(CrosswordPanel panel, Grid grid, Puzzle puzzle) {
         this.crosswordPanel = panel;
         this.grid = grid;
         this.timer = new Timer();
         this.fieldSketchMap = new HashMap<Field, ArrayList<Sketch>>();
-        // neuralNetwork = new NeuralNetwork();
-       // this.templateMatcher = new TemplateMatcher(".");
+        this.puzzle = puzzle;
     }
 
     public void mousePressed(MouseEvent e) {
@@ -95,10 +96,11 @@ public class CrosswordController extends MouseInputAdapter {
     	{
     		int row = _getStrokeRow()+(panel.getYOffset());
     		int column = _getStrokeColumn()+(panel.getXOffset());
+    		
     		currentSketch = new Sketch(row, column);
-    		//System.out.println("the row is " + row);
+    		//System.out.println("the row is " + panel.getYOffset());
     		//currentSketch = new Sketch(row, column);
-    		//System.out.println("the column is " + column);
+    		//System.out.println("the column is " + panel.getXOffset());
     	}
     	
     	currentSketch.addStroke(currentStroke);
@@ -136,7 +138,7 @@ public class CrosswordController extends MouseInputAdapter {
   		    try {
 				_startNewSketch();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			}
   		  }
@@ -272,7 +274,7 @@ public class CrosswordController extends MouseInputAdapter {
         			System.out.print(comp[i][j]);
         		System.out.println();
         	}
-        	testSketch(mat.getNeuralNetworkInput());
+        	//testSketch(mat.getNeuralNetworkInput());
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 

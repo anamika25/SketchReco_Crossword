@@ -23,7 +23,7 @@ public class Matrix{
 	
 	public void matrixCompression(int index) throws IOException{
 		
-		FileWriter fw = new FileWriter("train.txt", true);
+		//FileWriter fw = new FileWriter("train.txt", true);
 		int flag = 0;
 		for(int i=0;i<Constants.com_height;i++){
 			for(int j=0;j<Constants.com_width;j++){
@@ -44,11 +44,11 @@ public class Matrix{
 				else
 					comp[i][j] = 0;
 				neuralNetworkInput.add((double)comp[i][j]);
-				fw.write(comp[i][j]+" ");
+				//fw.write(comp[i][j]+" ");
 			}
 		}
-		fw.write(index+ "\n");
-		fw.close();
+		//fw.write(index+ "\n");
+		//fw.close();
 	}
 	public int[][] getComp(){
 		return comp;

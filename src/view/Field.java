@@ -6,6 +6,7 @@ import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import Utilities.*;
 import view.CrosswordPanel.SubPanel;
@@ -21,14 +22,20 @@ public class Field extends JLabel {
 	private int x;      // X position in game.
     private int y;      // Y position in game.
     private SubPanel parentPanel;
-    public Field(int x, int y, SubPanel parent) {
-        super("", CENTER);
+    private boolean shouldSetText = false;
+    
+    public Field(int x, int y, SubPanel parent, boolean shouldSetText, String text) {
+        super("", LEFT);
         this.x = x;
         this.y = y;
         this.parentPanel = parent;
         setPreferredSize(new Dimension(Constants.width,Constants.height));
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        setFont(new Font(Font.DIALOG, Font.PLAIN, 20));
+        setFont(new Font(Font.DIALOG, Font.PLAIN, 10));
+        if(shouldSetText) {
+        	setVerticalAlignment(TOP);
+        	setText(text);
+        }
         setOpaque(false);
     }
 

@@ -10,12 +10,16 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.BorderFactory;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.sun.xml.internal.ws.util.StringUtils;
 
 import Utilities.Constants;
 import controller.CrosswordController;
 import models.Sketch;
 import models.Stroke;
+import puzzle.Puzzle;
 
 public class CrosswordPanel extends JPanel implements Observer{
 	
@@ -24,19 +28,22 @@ public class CrosswordPanel extends JPanel implements Observer{
 		private Stroke ongoingStroke;
 		private int xOffset;
 		private int yOffset;
+		private boolean isBlack;
 		
-		public SubPanel(int xOff, int yOff){
+		public SubPanel(int xOff, int yOff, boolean isBlack){
 			super();
 			sketches = new ArrayList<Sketch>();
 			xOffset = xOff;
 			yOffset = yOff;
+			this.isBlack = isBlack;
 		}
 		
-		public SubPanel(GridLayout grid, int xOff, int yOff){
+		public SubPanel(GridLayout grid, int xOff, int yOff, boolean isBlack){
 			super(grid);
 			sketches = new ArrayList<Sketch>();
 			xOffset = xOff;
 			yOffset = yOff;
+			this.isBlack = isBlack;
 		}
 		
 		public int getXOffset(){
@@ -65,9 +72,14 @@ public class CrosswordPanel extends JPanel implements Observer{
 	    
 	    @Override
 	    public void paintComponent(Graphics g) {
-	        g.setColor(Color.WHITE);
-	        g.fillRect(0, 0, this.getWidth(), this.getHeight());
+	    	if(!isBlack) {
+	    		g.setColor(Color.WHITE);
+	    	    
+	    	} else {
+	    		g.setColor(Color.BLACK);
+	    	}
 	        
+	        g.fillRect(0, 0, this.getWidth(), this.getHeight());
 	        
 	        g.setColor(Color.BLACK);
 	        
@@ -95,12 +107,15 @@ public class CrosswordPanel extends JPanel implements Observer{
 	
 	private Field[][] fields;
 	private SubPanel[][] panels;
-	public CrosswordPanel() {
+	
+	public CrosswordPanel(Puzzle puzzle) {
 		super(new GridLayout(Constants.gridHeight, Constants.gridWidth));
 		panels = new SubPanel[Constants.gridHeight][Constants.gridWidth];
 		for (int y = 0; y < Constants.gridHeight; y++) {
             for (int x = 0; x < Constants.gridWidth; x++) {
-                panels[y][x] = new SubPanel(new GridLayout(Constants.subpanelHeight, Constants.subpanelWidth), x, y);
+            	int unique = ((y+x) *(y + x + 1))/2 + x;
+            	String currentState = puzzle.getPuzzle().get(unique);
+                panels[y][x] = new SubPanel(new GridLayout(Constants.subpanelHeight, Constants.subpanelWidth), x, y, (currentState.equals("B")));
                 panels[y][x].setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY));
                 add(panels[y][x]);
             }
@@ -109,11 +124,34 @@ public class CrosswordPanel extends JPanel implements Observer{
 		fields = new Field[Constants.gridHeight][Constants.gridWidth];
         for (int y = 0; y < Constants.gridHeight; y++) {
             for (int x = 0; x < Constants.gridWidth; x++) {
-                fields[y][x] = new Field(x, y, panels[y][x]);
+            	int unique = ((y+x) *(y + x + 1))/2 + x;
+            	String currentState = puzzle.getPuzzle().get(unique);
+            	if(isInteger(currentState)) {
+            		fields[y][x] = new Field(x, y, panels[y][x], true,currentState);
+            	} else {
+            		fields[y][x] = new Field(x, y, panels[y][x], false, "");
+            	}
+                
                 panels[y][x].add(fields[y][x]);
             }
         }
 		
+	}
+	
+	public static boolean isInteger(String s) {
+	    return isInteger(s,10);
+	}
+
+	public static boolean isInteger(String s, int radix) {
+	    if(s.isEmpty()) return false;
+	    for(int i = 0; i < s.length(); i++) {
+	        if(i == 0 && s.charAt(i) == '-') {
+	            if(s.length() == 1) return false;
+	            else continue;
+	        }
+	        if(Character.digit(s.charAt(i),radix) < 0) return false;
+	    }
+	    return true;
 	}
 	// TO DO
 	public void update(Observable o, Object arg) {
