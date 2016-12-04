@@ -278,7 +278,7 @@ public class CrosswordController extends MouseInputAdapter {
         			System.out.print(comp[i][j]);
         		System.out.println();
         	}
-        	testSketch(mat.getNeuralNetworkInput());
+        	//testSketch(mat.getNeuralNetworkInput());
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 
