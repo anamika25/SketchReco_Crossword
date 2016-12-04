@@ -13,12 +13,12 @@ public class NeuralNetwork {
 
     public double minError = Double.MAX_VALUE;
 
-    public int doubleIterationLimit = 3000;
+    public int doubleIterationLimit = 2000;
 
     public int lowerLimit = 200;
 
     public int iterationsGlobal = 0;
-
+    public int maxIterationLimit = 3000;
     ArrayList<ArrayList<Neuron>> bestNeuronsGlobal;
 
     public NeuralNetwork(ArrayList<Integer> hiddenLayers, int outputNeurons, int numInputNodes, Attribute targetAttr) {
@@ -147,7 +147,7 @@ public class NeuralNetwork {
                 bestNeuralWeights();
             }
 
-            if(i > doubleIterationLimit) {
+            if(i > doubleIterationLimit || i > maxIterationLimit) {
                 break;
             }
 

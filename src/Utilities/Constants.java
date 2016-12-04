@@ -20,9 +20,9 @@ public class Constants {
 	
 	//neural network params
 	public static int numAttributes = 65;
-	public static double eta = 0.02;
+	public static double eta = 0.05;
 	public static int hiddenLayers = 2;
-	public static int hiddenNodes = 32;
+	public static int hiddenNodes = 40;
 	public static int outputNodes = 26;
 	
 	// puzzle related constants

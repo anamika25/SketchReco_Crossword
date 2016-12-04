@@ -175,7 +175,7 @@ public class CrosswordController extends MouseInputAdapter {
     public void trainNeuralNetwork() {
     	ArrayList<Attribute> attributes = Utilities.constructAttributes();
     	
-    	 FileReaderUtility fileData = new FileReaderUtility("train.txt"); //TO DO
+    	 FileReaderUtility fileData = new FileReaderUtility("train_all.txt"); //TO DO
          ArrayList<String> fileDataRows = fileData.ReadFile();
          Utilities.randomizeData(fileDataRows);
 
@@ -278,7 +278,7 @@ public class CrosswordController extends MouseInputAdapter {
         			System.out.print(comp[i][j]);
         		System.out.println();
         	}
-        	//testSketch(mat.getNeuralNetworkInput());
+        	testSketch(mat.getNeuralNetworkInput());
 	    	currentSketch = null;
 	    	//crosswordPanel.repaint();
 		} 
