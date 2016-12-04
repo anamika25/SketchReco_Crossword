@@ -6,9 +6,9 @@ public class Constants {
 	public static int height = 80;
 	
 	//  final compresses matrix. 
-	public static int com_width = 5;
-	public static int com_height = 5; 
-	public static int mat_comp=16; 
+	public static int com_width = 8;
+	public static int com_height = 8; 
+	public static int mat_comp=10; 
 	
 	//grid params
 	public static int gridHeight = 10;
