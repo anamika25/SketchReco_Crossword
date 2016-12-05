@@ -22,7 +22,7 @@ public class Constants {
 	public static int numAttributes = 101;
 	public static double eta = 0.05;
 	public static int hiddenLayers = 2;
-	public static int hiddenNodes = 80;
+	public static int[] hiddenNodes = {80, 20};
 	public static int outputNodes = 26;
 	
 	// puzzle related constants

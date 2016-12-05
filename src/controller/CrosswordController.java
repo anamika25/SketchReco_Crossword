@@ -197,7 +197,7 @@ public class CrosswordController extends MouseInputAdapter {
          int numOfHiddenLayers = Constants.hiddenLayers;
          int argumentNum = 5;
          for(int i = 0; i < numOfHiddenLayers; ++i) {
-             hidden.add(Constants.hiddenNodes);
+             hidden.add(Constants.hiddenNodes[i]);
              ++argumentNum;
          }
          
@@ -324,7 +324,7 @@ public class CrosswordController extends MouseInputAdapter {
     		String currentText = currentField.getText();
     		String htmlText = "<p align='left'>" + currentText + "</p><br/>";
     		if(currentText.equals("")) {
-    			htmlText = htmlText + "<h1 style ='padding-bottom: 5px; padding-left:20px'>" + text + "</h1></html>";
+    			htmlText = htmlText + "<h1 style ='padding-bottom: 5px; padding-left:20px;'>" + text + "</h1></html>";
     		} else {
     			htmlText += "<h1 style ='padding-left:20px;'>" + text + "</h1></html>";
     		}
