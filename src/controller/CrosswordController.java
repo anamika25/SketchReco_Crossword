@@ -13,6 +13,7 @@ import java.util.TimerTask;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
+import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputAdapter;
 
 import com.sun.javafx.collections.MappingChange.Map;
@@ -312,10 +313,27 @@ public class CrosswordController extends MouseInputAdapter {
             if(((double)e.getValue()) == maxNeuron) {
             	int val = Integer.parseInt(e.getKey().toString()) + 65;
             	text = Character.toString((char)val);
+            	setTextInLabel(text);
             	System.out.println(text);
             	break;
             }
         }
+    }
+    
+    private void setTextInLabel(String text) {
+    		String finalText = "<html>";
+    		String currentText = currentField.getText();
+    		String htmlText = "<p align='left'>" + currentText + "</p><br/>";
+    		if(currentText.equals("")) {
+    			htmlText = htmlText + "<h1 style ='padding-bottom: 5px; padding-left:20px'>" + text + "</h1></html>";
+    		} else {
+    			htmlText += "<h1 style ='padding-left:20px;'>" + text + "</h1></html>";
+    		}
+    		finalText += htmlText;
+    		//currentField.setVerticalAlignment(SwingConstants.TOP);
+    		//currentField.setHorizontalAlignment(SwingConstants.CENTER);
+    		System.out.println(finalText);
+    		this.currentField.setText(finalText);
     }
    
 }

@@ -22,7 +22,7 @@ public class Field extends JLabel {
 	private int x;      // X position in game.
     private int y;      // Y position in game.
     private SubPanel parentPanel;
-    private boolean shouldSetText = false;
+    public boolean shouldSetText = false;
     
     public Field(int x, int y, SubPanel parent, boolean shouldSetText, String text) {
         super("", LEFT);
