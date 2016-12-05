@@ -148,7 +148,7 @@ public class CrosswordController extends MouseInputAdapter {
 			}
   		  }
   		};
-  		timer.schedule(timerTask, 3*1000);
+  		timer.schedule(timerTask, 1*1000);
     }
     
     public void mouseClicked(MouseEvent e) {
