@@ -54,6 +54,7 @@ public class CrosswordController extends MouseInputAdapter {
 	private static int index = 0;
 	private NeuralNetwork neuralNetwork;
 	private Puzzle puzzle;
+	public ArrayList<Field> wrongFields;
 	
     public CrosswordController(CrosswordPanel panel, Grid grid, Puzzle puzzle) {
         this.crosswordPanel = panel;
@@ -61,6 +62,7 @@ public class CrosswordController extends MouseInputAdapter {
         this.timer = new Timer();
         this.fieldSketchMap = new HashMap<Field, ArrayList<Sketch>>();
         this.puzzle = puzzle;
+        this.wrongFields = new ArrayList<Field>();
     }
 
     public void mousePressed(MouseEvent e) {
@@ -312,25 +314,38 @@ public class CrosswordController extends MouseInputAdapter {
             if(((double)e.getValue()) == maxNeuron) {
             	int val = Integer.parseInt(e.getKey().toString()) + 65;
             	text = Character.toString((char)val);
-            	setTextInLabel(text);
+            	setTextInLabel(text, currentSketch.getRow(), currentSketch.getColumn());
             	System.out.println(text);
             	break;
             }
         }
     }
     
-    private void setTextInLabel(String text) {
+    private void setTextInLabel(String text, int row, int column) {
     		String finalText = "<html>";
     		String currentText = currentField.getText();
+    	
+    		if(currentText.indexOf("html") != -1) {
+    			currentText= currentText.replaceAll("\\D+","");
+    		}
+    		
     		String htmlText = "<p align='left'>" + currentText + "</p><br/>";
+    		
+    		int unique = ((row + column) * (row + column + 1))/ 2 + column;
+    		String currentBoxSolution = puzzle.getSolution().get(unique);
+    		String color = "Green";
+    		if(!currentBoxSolution.equals(text)) {
+    			color = "Red";
+    			wrongFields.add(this.currentField);
+    		}
     		if(currentText.equals("")) {
-    			htmlText = htmlText + "<h1 style ='padding-bottom: 5px; padding-left:20px;'>" + text + "</h1></html>";
+    			this.currentField.shouldSetText = true;
+    			htmlText = htmlText + "<h1 style ='padding-bottom: 5px; padding-left:20px; color:" +color+ "'>" + text + "</h1></html>";
     		} else {
-    			htmlText += "<h1 style ='padding-left:20px;'>" + text + "</h1></html>";
+    			this.currentField.shouldSetText = false;
+    			htmlText += "<h1 style ='padding-left:20px; color:" + color+ "'>" + text + "</h1></html>";
     		}
     		finalText += htmlText;
-    		//currentField.setVerticalAlignment(SwingConstants.TOP);
-    		//currentField.setHorizontalAlignment(SwingConstants.CENTER);
     		System.out.println(finalText);
     		this.currentField.setText(finalText);
     }
