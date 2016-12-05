@@ -39,12 +39,6 @@ public class Field extends JLabel {
         setOpaque(false);
     }
 
-    public void setLetter(int letter, boolean userInput) {
-        setForeground(userInput ? Color.BLUE : Color.BLACK);
-        String num = letter > 0? LetterSet.alphabets[letter-1] + "" : "";
-        setText(num);
-    }
-
     public int getFieldX() {
         return x;
     }

@@ -158,7 +158,6 @@ public class CrosswordController extends MouseInputAdapter {
             Field field = (Field)component;
             int x = field.getFieldX(), y = field.getFieldY();
             //game.setNumber(x, y, "A");
-            field.setLetter(0, true);
             List<Sketch> sketches = currentPanel.getSketches();
             List<Sketch> fieldSketch = fieldSketchMap.get(field);
             for(Sketch s: fieldSketch) {

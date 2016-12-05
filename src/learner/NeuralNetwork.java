@@ -18,7 +18,7 @@ public class NeuralNetwork {
     public int lowerLimit = 200;
 
     public int iterationsGlobal = 0;
-    public int maxIterationLimit = 10;
+    public int maxIterationLimit = 2000;
     ArrayList<ArrayList<Neuron>> bestNeuronsGlobal;
 
     public NeuralNetwork(ArrayList<Integer> hiddenLayers, int outputNeurons, int numInputNodes, Attribute targetAttr) {
