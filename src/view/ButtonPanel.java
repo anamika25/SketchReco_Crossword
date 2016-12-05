@@ -15,7 +15,7 @@ import controller.ButtonController;
 //import model.UpdateAction;
 
 public class ButtonPanel extends JPanel {
-    JButton btnTrain, btnCheck, btnExit;   // Used buttons.
+    JButton btnTrain, btnErase, btnExit;   // Used buttons.
     JCheckBox cbHelp;               // Used check box.
     ButtonGroup bgNumbers;          // Group for grouping the toggle buttons.
     JToggleButton[] btnNumbers;     // Used toggle buttons.
@@ -36,9 +36,9 @@ public class ButtonPanel extends JPanel {
         btnTrain.setFocusable(false);
         pnlOptions.add(btnTrain);
 
-        btnCheck = new JButton("Check");
-        btnCheck.setFocusable(false);
-        pnlOptions.add(btnCheck);
+        btnErase= new JButton("Erase");
+        btnErase.setFocusable(false);
+        pnlOptions.add(btnErase);
 
         btnExit = new JButton("Exit");
         btnExit.setFocusable(false);
@@ -59,7 +59,7 @@ public class ButtonPanel extends JPanel {
     */
     public void setController(ButtonController buttonController) {
         btnTrain.addActionListener(buttonController);
-        btnCheck.addActionListener(buttonController);
+        btnErase.addActionListener(buttonController);
         btnExit.addActionListener(buttonController);
     }
 }
