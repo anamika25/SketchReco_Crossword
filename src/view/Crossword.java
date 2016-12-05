@@ -38,7 +38,7 @@ public class Crossword extends JFrame{
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        //controller.trainNeuralNetwork();
+        controller.trainNeuralNetwork();
 	}
 		
 	public static void main(String[] args) {
