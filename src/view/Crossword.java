@@ -23,7 +23,6 @@ public class Crossword extends JFrame{
         
         JPanel subButtonPanel = new JPanel();
         subButtonPanel.setLayout(new GridLayout(3,0,0,0));
-        
         ButtonController buttonController = new ButtonController(grid);
         ButtonPanel buttonPanel = new ButtonPanel();
         buttonPanel.setController(buttonController);
@@ -34,10 +33,14 @@ public class Crossword extends JFrame{
         CrosswordController controller = new CrosswordController(panel, grid, puzzle);
         panel.setController(controller);
         add(panel, BorderLayout.CENTER);
+        buttonController.setController(controller);
         grid.addObserver(panel);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+        
+        
+        
         controller.trainNeuralNetwork();
 	}
 		

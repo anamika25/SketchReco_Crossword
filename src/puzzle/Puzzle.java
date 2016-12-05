@@ -10,10 +10,9 @@ import learner.*;
 public class Puzzle {
 	private HashMap<Integer, String> solution;
 	private HashMap<Integer, String> initialState;
-	
 	public Puzzle() {
 		solution = new HashMap<Integer, String>();
-		initialState = new HashMap<Integer, String>();
+		initialState = new HashMap<Integer, String>(); 
 	}
 	
 	public void buildGame() {
