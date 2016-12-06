@@ -36,11 +36,13 @@ import models.Stroke;
 import puzzle.Puzzle;
 import view.CrosswordPanel;
 import view.Field;
+import view.RulesPanel;
 import view.CrosswordPanel.SubPanel;
 
 
 public class CrosswordController extends MouseInputAdapter {
-	private CrosswordPanel crosswordPanel;    
+	private CrosswordPanel crosswordPanel;
+	private RulesPanel rulesPanel;
     private Grid grid;                  
     private Stroke currentStroke;
     private Sketch currentSketch;
@@ -54,14 +56,17 @@ public class CrosswordController extends MouseInputAdapter {
 	private NeuralNetwork neuralNetwork;
 	private Puzzle puzzle;
 	public ArrayList<Field> wrongFields;
+	public int game ;
 	
-    public CrosswordController(CrosswordPanel panel, Grid grid, Puzzle puzzle) {
+    public CrosswordController(CrosswordPanel panel, Grid grid, Puzzle puzzle, RulesPanel rulesPanel, int game) {
         this.crosswordPanel = panel;
+        this.rulesPanel = rulesPanel;
         this.grid = grid;
         this.timer = new Timer();
         this.fieldSketchMap = new HashMap<Field, ArrayList<Sketch>>();
         this.puzzle = puzzle;
         this.wrongFields = new ArrayList<Field>();
+        this.game = game;
     }
 
     public void mousePressed(MouseEvent e) {
@@ -348,5 +353,16 @@ public class CrosswordController extends MouseInputAdapter {
     		System.out.println(finalText);
     		this.currentField.setText(finalText);
     }
+    
+    public void setPuzzle(Puzzle puzzleNew) {
+    	this.puzzle = puzzleNew;
+    }
+    
+    public CrosswordPanel getCrosswordPanel() {
+    	return crosswordPanel;
+    }
    
+    public RulesPanel getRulesPanel() {
+    	return rulesPanel;
+    }
 }

@@ -37,13 +37,17 @@ public class ButtonPanel extends JPanel {
         btnErase.setFocusable(false);
         pnlOptions.add(btnErase);
 
+        btnTrain= new JButton("New-Game");
+        btnTrain.setFocusable(false);
+        pnlOptions.add(btnTrain);
+        
         btnExit = new JButton("Exit");
         btnExit.setFocusable(false);
         pnlOptions.add(btnExit);
     }
 
     public void setController(ButtonController buttonController) {
-        //btnTrain.addActionListener(buttonController);
+        btnTrain.addActionListener(buttonController);
         btnErase.addActionListener(buttonController);
         btnExit.addActionListener(buttonController);
     }

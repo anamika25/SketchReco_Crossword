@@ -12,6 +12,7 @@ import java.util.Observer;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
@@ -138,6 +139,33 @@ public class CrosswordPanel extends JPanel implements Observer{
 		
 	}
 	
+	public void startNewGame(Puzzle newPuzzle) {
+		for (int y = 0; y < Constants.gridHeight; y++) {
+            for (int x = 0; x < Constants.gridWidth; x++) {
+            	int unique = ((y+x) *(y + x + 1))/2 + x;
+            	String currentState = newPuzzle.getPuzzle().get(unique);
+            	panels[x][y].setBackground(Color.WHITE);
+            	if(currentState.equals("B")) {
+            		panels[x][y].setBackground(Color.BLACK);
+            	}
+            }
+		}
+		
+		for (int y = 0; y < Constants.gridHeight; y++) {
+            for (int x = 0; x < Constants.gridWidth; x++) {
+            	int unique = ((y+x) *(y + x + 1))/2 + x;
+            	String currentState = newPuzzle.getPuzzle().get(unique);
+            	if(isInteger(currentState)) {
+            		fields[x][y].setVerticalAlignment(SwingConstants.TOP);
+            		fields[x][y].setText(currentState);
+            	} else {
+            		fields[x][y].setText("");
+            	}
+            }
+		}
+		
+		
+	}
 	public static boolean isInteger(String s) {
 	    return isInteger(s,10);
 	}

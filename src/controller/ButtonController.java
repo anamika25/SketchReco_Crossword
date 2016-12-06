@@ -3,8 +3,10 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import models.Grid;
+import puzzle.Puzzle;
 import view.Field;
 
 public class ButtonController implements ActionListener {
@@ -20,8 +22,15 @@ public class ButtonController implements ActionListener {
     }
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("Train")) {
-        	grid.trainData();
+        if (e.getActionCommand().equals("New-Game")) {
+        	int newGame = (this.controller.game+2) % 4 + 1;
+            Puzzle puzzle = new Puzzle();
+            puzzle.buildGame(newGame);
+        	this.controller.setPuzzle(puzzle);
+        	this.controller.game = newGame;
+        	this.controller.getCrosswordPanel().startNewGame(puzzle);
+        	this.controller.getRulesPanel().setTextNew(puzzle.getRules());
+        	
         }else if (e.getActionCommand().equals("Exit")) {
             System.exit(0);
         } else if(e.getActionCommand().equals("Erase")) {
@@ -34,7 +43,7 @@ public class ButtonController implements ActionListener {
         		}	
         	}
         	controller.wrongFields = new ArrayList<Field>();
-        }
+        } 
         /*       
         else if (e.getActionCommand().equals("Check"))
         	grid.checkGame();

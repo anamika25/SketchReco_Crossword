@@ -44,7 +44,7 @@ public class Crossword extends JFrame{
         
         
         CrosswordPanel panel = new CrosswordPanel(puzzle);
-        CrosswordController controller = new CrosswordController(panel, grid, puzzle);
+        CrosswordController controller = new CrosswordController(panel, grid, puzzle, rulesPanel, Result);
         panel.setController(controller);
         add(panel, BorderLayout.CENTER);
         buttonController.setController(controller);
