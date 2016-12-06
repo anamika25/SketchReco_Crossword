@@ -23,10 +23,6 @@ public class FileReaderUtility {
 
             while((line = bufferedReader.readLine()) != null)
             {
-                if(line.charAt(0) == '#')
-                {
-                    continue;
-                }
                 clauses.add(line.trim());
             }
 

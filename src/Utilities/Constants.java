@@ -28,6 +28,6 @@ public class Constants {
 	// puzzle related constants
 	public static String solutionPath = "solution_1.txt";
 	public static String puzzlePath = "puzzle_1.txt";
-
+	public static String puzzleRulesPath = "Puzzle1_rules.txt";
 
 }

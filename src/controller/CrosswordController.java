@@ -15,7 +15,6 @@ import java.io.IOException;
 
 import javax.swing.SwingConstants;
 import javax.swing.event.MouseInputAdapter;
-
 import com.sun.javafx.collections.MappingChange.Map;
 
 import Utilities.Constants;

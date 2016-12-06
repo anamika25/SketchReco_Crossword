@@ -12,7 +12,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 import controller.ButtonController;
-//import model.UpdateAction;
+
 
 public class ButtonPanel extends JPanel {
     JButton btnTrain, btnErase, btnExit;   // Used buttons.
@@ -32,9 +32,6 @@ public class ButtonPanel extends JPanel {
         pnlOptions.setBorder(BorderFactory.createTitledBorder(" Options "));
         pnlAlign.add(pnlOptions);
 
-        btnTrain = new JButton("Train");
-        btnTrain.setFocusable(false);
-        pnlOptions.add(btnTrain);
 
         btnErase= new JButton("Erase");
         btnErase.setFocusable(false);
@@ -44,21 +41,9 @@ public class ButtonPanel extends JPanel {
         btnExit.setFocusable(false);
         pnlOptions.add(btnExit);
     }
-    /*
-    public void update(Observable o, Object arg) {
-        switch ((UpdateAction)arg) {
-            case NEW_GAME:
-            case CHECK:
-            	if(bgNumbers != null)
-            		bgNumbers.clearSelection();
-                break;
-            default:
-            	break;
-        }
-    }
-    */
+
     public void setController(ButtonController buttonController) {
-        btnTrain.addActionListener(buttonController);
+        //btnTrain.addActionListener(buttonController);
         btnErase.addActionListener(buttonController);
         btnExit.addActionListener(buttonController);
     }
