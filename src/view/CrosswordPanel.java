@@ -144,9 +144,9 @@ public class CrosswordPanel extends JPanel implements Observer{
             for (int x = 0; x < Constants.gridWidth; x++) {
             	int unique = ((y+x) *(y + x + 1))/2 + x;
             	String currentState = newPuzzle.getPuzzle().get(unique);
-            	panels[x][y].setBackground(Color.WHITE);
+            	panels[y][x].setBackground(Color.WHITE);
             	if(currentState.equals("B")) {
-            		panels[x][y].setBackground(Color.BLACK);
+            		panels[y][x].setBackground(Color.BLACK);
             	}
             }
 		}
@@ -156,10 +156,10 @@ public class CrosswordPanel extends JPanel implements Observer{
             	int unique = ((y+x) *(y + x + 1))/2 + x;
             	String currentState = newPuzzle.getPuzzle().get(unique);
             	if(isInteger(currentState)) {
-            		fields[x][y].setVerticalAlignment(SwingConstants.TOP);
-            		fields[x][y].setText(currentState);
+            		fields[y][x].setVerticalAlignment(SwingConstants.TOP);
+            		fields[y][x].setText(currentState);
             	} else {
-            		fields[x][y].setText("");
+            		fields[y][x].setText("");
             	}
             }
 		}
